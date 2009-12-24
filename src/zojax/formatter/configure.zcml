@@ -1,0 +1,104 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:i18n="http://namespaces.zope.org/i18n"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:tales="http://namespaces.zope.org/tales"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.formatter">
+
+  <!-- zope.conf configuration -->
+  <subscriber handler=".config.initFormatter" />
+
+  <!-- formatter: chameleon expression -->
+  <utility
+     name="formatter"
+     factory=".chameleonexpr.FormatterTranslator" />
+
+  <!-- formatter: tales expresison -->
+  <tales:expressiontype
+     name="formatter"
+     handler=".expression.FormatterExpression" />
+
+  <!-- formatters -->
+  <adapter name="date"
+     factory=".dformatter.DateFormatterFactory" />
+
+  <adapter name="time"
+     factory=".timeformatter.TimeFormatterFactory" />
+
+  <adapter name="dateTime"
+     factory=".dtformatter.DatetimeFormatterFactory" />
+
+  <adapter name="fancyDatetime"
+     factory=".fancydatetime.FancyDatetimeFormatterFactory" />
+
+  <adapter name="humanDatetime"
+     factory=".humandatetime.HumanDatetimeFormatterFactory" />
+
+  <!-- vocabularies -->
+  <utility
+     name="Timezones"
+     factory=".vocabulary.Timezones" />
+
+  <!-- formatter configlet -->
+  <configure
+     xmlns:zcml="http://namespaces.zope.org/zcml"
+     xmlns:browser="http://namespaces.zope.org/browser"
+     zcml:condition="installed zojax.controlpanel">
+
+    <include package="zojax.controlpanel" file="meta.zcml" />
+    <include package="zojax.controlpanel" />
+
+    <zojax:configlet
+       name="system.formatter"
+       schema=".interfaces.IFormatterConfiglet"
+       title="Portal formatters"
+       description="Configure portal formatters.">
+      <allow interface=".interfaces.IFormatterConfiglet" />
+    </zojax:configlet>
+
+    <browser:icon
+       name="zmi_icon"
+       for=".interfaces.IFormatterConfiglet"
+       file="preferences-formatter.png" />
+  </configure>
+
+  <configure
+     xmlns:zcml="http://namespaces.zope.org/zcml"
+     xmlns:browser="http://namespaces.zope.org/browser"
+     zcml:condition="installed zojax.resourcepackage">
+
+    <!-- ecmascripts -->
+    <zojax:resourceinclude
+       name="humandatetime.js"
+       type="javascript"
+       library="zojax"
+       require="jquery-plugins"
+       file="resources/humandatetime.js" />
+
+    <zojax:resourceinclude
+       name="fancydatetime.js"
+       type="javascript"
+       library="zojax"
+       require="jquery-plugins"
+       file="resources/fancydatetime.js" />
+
+  </configure>
+
+  <!-- Registering documentation with API doc -->
+  <configure
+     xmlns:apidoc="http://namespaces.zope.org/apidoc"
+     xmlns:zcml="http://namespaces.zope.org/zcml"
+     zcml:condition="have apidoc">
+
+    <apidoc:bookchapter
+       id="zojax-formatter"
+       title="zojax.formatter - formatter TALES expression"
+       doc_path="README.txt"
+       parent="zojax" />
+  </configure>
+
+  <!-- translations -->
+  <i18n:registerTranslations directory="locales"/>
+
+</configure>

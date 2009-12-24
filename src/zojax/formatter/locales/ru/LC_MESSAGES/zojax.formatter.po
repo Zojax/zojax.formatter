@@ -1,0 +1,74 @@
+###############################################################################
+#
+# Copyright (c) 2009 Zope Foundation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+# #############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: Development/Unknown\n"
+"POT-Creation-Date: Mon Oct 20 22:53:40 2008\n"
+"PO-Revision-Date: 2008-10-21 13:43+0600\n"
+"Last-Translator: Nikolay Kim <fafhrd91@gmail.com>\n"
+"Language-Team: Zope 3 Developers <zope3-dev@zope.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+
+#: src/zojax/formatter/configure.zcml:26
+msgid "Configure portal formatters."
+msgstr "Конфигурация средств форматирования."
+
+#: src/zojax/formatter/configure.zcml:26
+msgid "Portal formatters"
+msgstr "Cредства форматирования"
+
+#. Default: ""
+#: src/zojax/formatter/fancydatetime.py:72
+msgid "Today at ${value}"
+msgstr "Сегодня в ${value}"
+
+#. Default: ""
+#: src/zojax/formatter/fancydatetime.py:82
+msgid "Yesterday at ${value}"
+msgstr "Вчера в ${value}"
+
+#: src/zojax/formatter/interfaces.py:35
+msgid "Timezone"
+msgstr "Часовой пояс"
+
+#: src/zojax/formatter/interfaces.py:36
+msgid "Portal timezone."
+msgstr "Часовой пояс сайта."
+
+#: src/zojax/formatter/interfaces.py:42 src/zojax/formatter/interfaces.py:43
+msgid "Timezone format"
+msgstr "Формат часового пояса"
+
+#: src/zojax/formatter/interfaces.py:49
+msgid "Use principal timezone"
+msgstr "Использовать часовой пояс пользователя"
+
+#: src/zojax/formatter/interfaces.py:50
+msgid "Render datetime with user selected timezone."
+msgstr "Отображать дату и время в зависимости от выбора пользователя."
+
+#: src/zojax/formatter/vocabulary.py:28
+msgid "No timezone"
+msgstr "Без часового пояса"
+
+#: src/zojax/formatter/vocabulary.py:29
+msgid "Number of hours"
+msgstr "Колличество часов"
+
+#: src/zojax/formatter/vocabulary.py:30
+msgid "Timezone name"
+msgstr "Название часового пояса"
