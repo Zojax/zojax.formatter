@@ -17,10 +17,10 @@ function setFancydatetimeFormatter(el)
     var res;
 
     if (!years && !months && !weeks && (now.getDay() != date.getDay())) {
-        res = 'Yesterday at ' + date.toTimeString();
+        res = 'Yesterday at ' + el.attr('time');
 
     } else if (!years && !months && !weeks && (now.getDay() == date.getDay())) {
-        res = 'Today at ' + date.toTimeString();
+        res = 'Today at ' + el.attr('time');
     } else {
         res = el.attr('date') + ' ' + el.attr('time');
     }
