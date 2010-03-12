@@ -2,10 +2,10 @@ function setFancydatetimeFormatter(el)
 {
     var date = new Date();
     date.setTime(Date.parse(el.text()));
-
+    
     var now = new Date();
 
-    delta = now-date;
+    delta = now.UTC()-date.UTC();
     if (delta < 0) {
         delta = Math.abs(delta);
     }
@@ -16,10 +16,10 @@ function setFancydatetimeFormatter(el)
 
     var res;
 
-    if (!years && !months && !weeks && (now.getDay() != date.getDay())) {
+    if (!years && !months && !weeks && days == 1) {
         res = 'Yesterday at ' + el.attr('time');
 
-    } else if (!years && !months && !weeks && (now.getDay() == date.getDay())) {
+    } else if (!years && !months && !weeks && days == 0) {
         res = 'Today at ' + el.attr('time');
     } else {
         res = el.attr('date') + ' ' + el.attr('time');
