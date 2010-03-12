@@ -16,7 +16,7 @@
 $Id$
 """
 
-from pytz import utc, timezone
+from pytz import utc, timezone, FixedOffset
 from datetime import datetime
 from zope import interface, component
 from zope.i18n import translate
