@@ -15,6 +15,7 @@ function setFancydatetimeFormatter(el)
     days = Math.floor(delta/(24*60*60*1000.0));
 
     var res;
+    console.log(date, now, now.getDay(), date.getDay());
 
     if (!years && !months && !weeks && (now.getDay() != date.getDay())) {
         res = 'Yesterday at ' + el.attr('time');
