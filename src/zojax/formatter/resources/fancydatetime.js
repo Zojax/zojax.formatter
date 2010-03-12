@@ -4,7 +4,7 @@ function setFancydatetimeFormatter(el)
     date.setTime(Date.parse(el.text()));
     
     var now = new Date();
-    delta = Math.abs(now-date) + 60*1000*(now.getTimezoneOffset()-parseInt(el.attr('offset')));
+    delta = Math.abs(now-date) + 60*1000*(parseInt(el.attr('offset'))-now.getTimezoneOffset());
     years = Math.floor(delta/(365*24*60*60*1000.0));
     months = Math.floor(delta/(30*24*60*60*1000.0));
     weeks = Math.floor(delta/(7*24*60*60*1000.0));
