@@ -15,13 +15,12 @@ function setFancydatetimeFormatter(el)
     days = Math.floor(delta/(24*60*60*1000.0));
 
     var res;
-    console.log(date, now, now.getDay(), date.getDay());
 
     if (!years && !months && !weeks && (now.getDay() != date.getDay())) {
-        res = 'Yesterday at ' + el.attr('time');
+        res = 'Yesterday at ' + date.toTimeString();
 
     } else if (!years && !months && !weeks && (now.getDay() == date.getDay())) {
-        res = 'Today at ' + el.attr('time');
+        res = 'Today at ' + date.toTimeString();
     } else {
         res = el.attr('date') + ' ' + el.attr('time');
     }
