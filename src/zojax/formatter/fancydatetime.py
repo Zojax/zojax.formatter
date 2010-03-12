@@ -47,10 +47,10 @@ class FancyDatetimeFormatter(object):
         tz = timezone(configlet.timezone)
 
         if value.tzinfo is None:
-            value = datetime(value.year, value.month, value.day, value.hour,
-                             value.minute, value.second, value.microsecond, tz)
+            value = utc.localize(value)
 
-        value = value.astimezone(tz)
+        offset = (value.tzinfo.utcoffset(value).seconds/600)*10
+        value = FixedOffset(offset).normalize(value)
 
         fdate = unicode(value.strftime(str(getattr(configlet,'date_'+self.tp))))
         ftime = unicode(value.strftime(str(getattr(configlet,'time_'+self.tp))))
