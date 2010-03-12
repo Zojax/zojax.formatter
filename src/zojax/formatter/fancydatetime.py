@@ -48,6 +48,8 @@ class FancyDatetimeFormatter(object):
 
         if value.tzinfo is None:
             value = utc.localize(value)
+            
+        value = value.astimezone(tz)
 
         offset = (value.tzinfo.utcoffset(value).seconds/600)*10
         value = FixedOffset(offset).normalize(value)
