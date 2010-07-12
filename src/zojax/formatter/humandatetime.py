@@ -65,7 +65,13 @@ class HumanDatetimeFormatter(object):
             delta = - delta + timedelta(seconds=1) #due to python implementation
             key = 'future'
 
-        offset = (value.tzinfo.utcoffset(value).seconds/600)*10
+        offset = value.tzinfo.utcoffset(value)
+        if offset < timedelta():
+            ind = -1
+        else:
+            ind = 1
+        offset = ind*(abs(offset).seconds/600)*10
+
         value = FixedOffset(offset).normalize(value)
 
         years, months, weeks, hours, minutes = (

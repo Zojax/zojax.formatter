@@ -17,7 +17,7 @@ $Id$
 """
 
 from pytz import utc, timezone, FixedOffset
-from datetime import datetime
+from datetime import datetime, timedelta
 from zope import interface, component
 from zope.i18n import translate
 from zope.component import getUtility
@@ -48,17 +48,27 @@ class FancyDatetimeFormatter(object):
 
         if value.tzinfo is None:
             value = utc.localize(value)
-            
+
+        print value
+
         value = value.astimezone(tz)
 
-        offset = (value.tzinfo.utcoffset(value).seconds/600)*10
+        offset = value.tzinfo.utcoffset(value)
+        if offset < timedelta():
+            ind = -1
+        else:
+            ind = 1
+        offset = ind*(abs(offset).seconds/600)*10
+
         value = FixedOffset(offset).normalize(value)
 
         fdate = unicode(value.strftime(str(getattr(configlet,'date_'+self.tp))))
         ftime = unicode(value.strftime(str(getattr(configlet,'time_'+self.tp))))
- 
-        return u'<span class="zojax-formatter-fancydatetime" date="%s" time="%s" offset="%s">%s</span>' \
-            % (fdate, ftime, offset, value.strftime('%B %d, %Y %H:%M:%S %z'))
+
+        formatted = value.strftime('%B %d, %Y %H:%M:%S %z')
+
+        return u'<span class="zojax-formatter-fancydatetime" date="%s" time="%s" offset="%s" value="%s">%s</span>' \
+            % (fdate, ftime, offset, value.strftime('%B %d, %Y %H:%M:%S %z'), formatted)
 
 
 
