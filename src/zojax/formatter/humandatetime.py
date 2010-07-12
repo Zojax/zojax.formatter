@@ -56,6 +56,8 @@ class HumanDatetimeFormatter(object):
         if value.tzinfo is None:
             value = utc.localize(value)
 
+        value = value.astimezone(tz)
+
         now = datetime.now(utc)
         delta = now - value.astimezone(utc)
         key = 'past'
