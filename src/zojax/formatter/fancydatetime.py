@@ -49,8 +49,6 @@ class FancyDatetimeFormatter(object):
         if value.tzinfo is None:
             value = utc.localize(value)
 
-        print value
-
         value = value.astimezone(tz)
 
         offset = value.tzinfo.utcoffset(value)
