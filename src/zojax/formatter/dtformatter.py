@@ -18,23 +18,34 @@ $Id$
 """
 from pytz import timezone
 from datetime import datetime
+from simplejson import dumps
 
 from zope import interface, component
 from zope.component import getUtility
 from zope.interface.common.idatetime import ITZInfo
 from zope.publisher.interfaces.http import IHTTPRequest
 
+from zojax.resourcepackage.library import includeInplaceSource
+
 from interfaces import IFormatter, IFormatterFactory, IFormatterConfiglet
+from dformatter import DateFormatter
 
 
-class DatetimeFormatter(object):
+jssource = """<script type="text/javascript">
+    var datetime_formats = %s;
+</script>"""
+
+
+class DatetimeFormatter(DateFormatter):
     interface.implements(IFormatter)
 
     def __init__(self, request, *args):
-        try:
-            self.tp = args[0]
-        except:
-            self.tp = 'medium'
+        super(DatetimeFormatter, self).__init__(request, *args)
+        formats = map(lambda x: (x, request.locale.dates.getFormatter('dateTime', x).getPattern()), ['short', 
+                                                                                  'medium',
+                                                                                  'long',
+                                                                                  'full'])
+        includeInplaceSource(jssource%dumps(dict(formats)))
 
     def format(self, value):
         if not isinstance(value, datetime):
@@ -52,8 +63,10 @@ class DatetimeFormatter(object):
         format = '%s %s'%(
             getattr(configlet, 'date_'+self.tp),
             getattr(configlet, 'time_'+self.tp))
-
-        return unicode(value.strftime(str(format)))
+        
+        formatted = unicode(value.strftime(str(format)))
+        return u'<span class="zojax-formatter-datetime" value="%s" format="%s">%s</span>' \
+                % (value.strftime('%B %d, %Y %H:%M:%S %z'), self.tp, formatted)
 
 
 class DatetimeFormatterFactory(object):

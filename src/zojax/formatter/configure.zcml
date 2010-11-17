@@ -70,6 +70,27 @@
 
     <!-- ecmascripts -->
     <zojax:resourceinclude
+       name="resources/jquery.dateFormat.js"
+       type="javascript"
+       library="zojax"
+       require="jquery-plugins"
+       file="resources/jquery.dateFormat-1.0.js" />
+       
+    <zojax:resourceinclude
+       name="date.js"
+       type="javascript"
+       library="zojax"
+       require="jquery-plugins"
+       file="resources/date.js" />
+       
+    <zojax:resourceinclude
+       name="datetime.js"
+       type="javascript"
+       library="zojax"
+       require="jquery-plugins"
+       file="resources/datetime.js" />
+    
+    <zojax:resourceinclude
        name="humandatetime.js"
        type="javascript"
        library="zojax"

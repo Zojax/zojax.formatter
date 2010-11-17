@@ -74,11 +74,11 @@ DateTime formatter
    >>> page.pt_edit(u'''
    ... <html>
    ...   <body>
-   ...     <tal:block tal:content="formatter:dateTime,short:options/now" />
-   ...     <tal:block tal:content="formatter:dateTime,medium:options/now" />
-   ...     <tal:block tal:content="formatter:dateTime,long:options/now" />
-   ...     <tal:block tal:content="formatter:dateTime,full:options/now" />
-   ...     <tal:block tal:content="formatter:dateTime:options/now" />
+   ...     <tal:block tal:content="structure formatter:dateTime,short:options/now" />
+   ...     <tal:block tal:content="structure formatter:dateTime,medium:options/now" />
+   ...     <tal:block tal:content="structure formatter:dateTime,long:options/now" />
+   ...     <tal:block tal:content="structure formatter:dateTime,full:options/now" />
+   ...     <tal:block tal:content="structure formatter:dateTime:options/now" />
    ...   </body>
    ... </html>''', 'text/html')
 
@@ -91,11 +91,11 @@ By default we use UTC timezone for output:
    >>> print page.render(request, now=dt)
    <html>
      <body>
-       01/01/07 12:00 AM
-       Jan 01, 2007 12:00:00 AM
-       January 01, 2007 12:00:00 AM +0000
-       Monday, January 01, 2007 12:00:00 AM UTC
-       Jan 01, 2007 12:00:00 AM
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="short">01/01/07 12:00 AM</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium">Jan 01, 2007 12:00:00 AM</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="long">January 01, 2007 12:00:00 AM +0000</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="full">Monday, January 01, 2007 12:00:00 AM UTC</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium">Jan 01, 2007 12:00:00 AM</span>
      </body>
    </html>
 
@@ -105,11 +105,11 @@ If datetime object doesn't contain timezone information, UTC is used
    >>> print page.render(request, now=datetime(2007, 1, 1, 0, 0))
    <html>
      <body>
-       01/01/07 12:00 AM
-       Jan 01, 2007 12:00:00 AM
-       January 01, 2007 12:00:00 AM +0000
-       Monday, January 01, 2007 12:00:00 AM UTC
-       Jan 01, 2007 12:00:00 AM
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="short">01/01/07 12:00 AM</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium">Jan 01, 2007 12:00:00 AM</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="long">January 01, 2007 12:00:00 AM +0000</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="full">Monday, January 01, 2007 12:00:00 AM UTC</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium">Jan 01, 2007 12:00:00 AM</span>
      </body>
    </html>
 
@@ -122,11 +122,11 @@ not datetime value
    >>> print page.render(request, now=dt)
    <html>
      <body>
-       12/31/06 04:00 PM
-       Dec 31, 2006 04:00:00 PM
-       December 31, 2006 04:00:00 PM -0800
-       Sunday, December 31, 2006 04:00:00 PM PST
-       Dec 31, 2006 04:00:00 PM
+        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="short">12/31/06 04:00 PM</span>
+        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="medium">Dec 31, 2006 04:00:00 PM</span>
+        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="long">December 31, 2006 04:00:00 PM -0800</span>
+        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="full">Sunday, December 31, 2006 04:00:00 PM PST</span>
+        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="medium">Dec 31, 2006 04:00:00 PM</span>
      </body>
    </html>
 
@@ -198,8 +198,8 @@ Date formatter
    >>> datepage.pt_edit(u'''
    ... <html>
    ...   <body>
-   ...     <tal:block tal:content="formatter:date:options/today" />
-   ...     <tal:block tal:content="formatter:date,short:options/today" />
+   ...     <tal:block tal:content="structure formatter:date:options/today" />
+   ...     <tal:block tal:content="structure formatter:date,short:options/today" />
    ...   </body>
    ... </html>''', 'text/html')
 
@@ -210,8 +210,8 @@ Date formatter
    >>> print datepage.render(request, today=d)
    <html>
      <body>
-       Jan 01, 2007
-       01/01/07
+       <span class="zojax-formatter-date" value="January 01, 2007 00:00:00 " format="medium">Jan 01, 2007</span>
+       <span class="zojax-formatter-date" value="January 01, 2007 00:00:00 " format="short">01/01/07</span>
      </body>
    </html>
 
@@ -221,7 +221,7 @@ Also you can get formatter from python code
    >>> from zojax.formatter.utils import getFormatter
    >>> formatter = getFormatter(request, 'dateTime', 'full')
    >>> formatter.format(dt)
-   u'Sunday, December 31, 2006 04:00:00 PM PST'
+   u'<span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="full">Sunday, December 31, 2006 04:00:00 PM PST</span>'
 
 We will get FormatterNotDefined if formatter is unknown
 
