@@ -18,34 +18,18 @@ $Id$
 """
 from pytz import timezone
 from datetime import datetime
-from simplejson import dumps
 
 from zope import interface, component
 from zope.component import getUtility
 from zope.interface.common.idatetime import ITZInfo
 from zope.publisher.interfaces.http import IHTTPRequest
 
-from zojax.resourcepackage.library import includeInplaceSource
-
 from interfaces import IFormatter, IFormatterFactory, IFormatterConfiglet
 from dformatter import DateFormatter
 
 
-jssource = """<script type="text/javascript">
-    var datetime_formats = %s;
-</script>"""
-
-
 class DatetimeFormatter(DateFormatter):
     interface.implements(IFormatter)
-
-    def __init__(self, request, *args):
-        super(DatetimeFormatter, self).__init__(request, *args)
-        formats = map(lambda x: (x, request.locale.dates.getFormatter('dateTime', x).getPattern()), ['short', 
-                                                                                  'medium',
-                                                                                  'long',
-                                                                                  'full'])
-        includeInplaceSource(jssource%dumps(dict(formats)))
 
     def format(self, value):
         if not isinstance(value, datetime):

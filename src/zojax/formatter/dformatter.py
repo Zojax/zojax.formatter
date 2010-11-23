@@ -17,7 +17,7 @@ Author: Nikolay Kim <fafhrd91@gmail.com>
 $Id$
 """
 from datetime import date
-from simplejson import dumps
+
 from zope import interface, component
 from zope.component import getUtility
 from zope.publisher.interfaces.http import IHTTPRequest
@@ -25,13 +25,6 @@ from zope.publisher.interfaces.http import IHTTPRequest
 from zojax.resourcepackage.library import includeInplaceSource
 
 from interfaces import IFormatter, IFormatterFactory, IFormatterConfiglet
-
-
-jssource = """<script type="text/javascript">
-var date_formats = %s;
-var month_names = %s;
-var day_names = %s;
-</script>"""
 
 
 class DateFormatter(object):
@@ -42,16 +35,6 @@ class DateFormatter(object):
             self.tp = args[0]
         except:
             self.tp = 'medium'
-        locale = request.locale
-        gregorian = locale.dates.calendars.get('gregorian')
-        month_names = gregorian.getMonthNames()
-        day_names = gregorian.getDayNames()
-        formats = map(lambda x: (x, locale.dates.getFormatter('date', x).getPattern()), ['short', 
-                                                                                  'medium',
-                                                                                  'long',
-                                                                                  'full'])
-        includeInplaceSource(jssource%(dumps(dict(formats)), \
-                                       dumps(month_names), dumps(day_names)))
 
     def format(self, value):
         if not isinstance(value, date):
