@@ -49,8 +49,10 @@ class FormatterHeaders(object):
                                                                                   'long',
                                                                                   'full'])
         includeInplaceSource(jssource%(dumps(dict(dt_formats)), \
-                                       dumps(month_names), dumps(day_names), \
-                                       dumps(dict(d_formats))))
+                                       dumps(dict(d_formats)), \
+                                       dumps(month_names), 
+                                       dumps(day_names)
+                                       ))
     
     def render(self):
         return u''
