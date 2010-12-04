@@ -150,8 +150,15 @@
                                 pattern = "";
                             }
                             break;
+                        case "MMM":
+                            if (format.charAt(i+1) != 'M'){
+                                retValue += month_names[month-1].slice(0, 3);
+                                pattern = "";
+                                break;
+                            }
+                            break;
                         case "MMMM":
-                            retValue += month_names[month-1];;
+                            retValue += month_names[month-1];
                             pattern = "";
                             break;
                         case "yy":
@@ -209,6 +216,10 @@
                             pattern = "";
                             break;
                         case ",":
+                            retValue += currentPattern;
+                            pattern = "";
+                            break;
+                        case ".":
                             retValue += currentPattern;
                             pattern = "";
                             break;
