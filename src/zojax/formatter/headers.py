@@ -24,6 +24,7 @@ from zojax.resourcepackage.library import includeInplaceSource
 
 jssource = """<script type="text/javascript">
 var datetime_formats = %s;
+var time_formats = %s;
 var date_formats = %s;
 var month_names = %s;
 var day_names = %s;
@@ -48,7 +49,13 @@ class FormatterHeaders(object):
                                                                                   'medium',
                                                                                   'long',
                                                                                   'full'])
+        t_formats = map(lambda x: (x, locale.dates.getFormatter('time', x).getPattern()), ['short', 
+                                                                                  'medium',
+                                                                                  'long',
+                                                                                  'full'])
+        
         includeInplaceSource(jssource%(dumps(dict(dt_formats)), \
+                                       dumps(dict(t_formats)), \
                                        dumps(dict(d_formats)), \
                                        dumps(month_names), 
                                        dumps(day_names)

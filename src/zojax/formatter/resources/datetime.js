@@ -1,5 +1,13 @@
 function setDatetimeFormatter(el)
 {
+    var date = new Date();
+    date.setTime(Date.parse(el.text()));
+    
+    var now = new Date();
+    var time = date.getTime()+now.getTimezoneOffset() - 60*1000*(parseInt(el.attr('offset')));
+    date.setTime(time);
+    var time_string = $.format.date(date, time_formats[el.attr('format')]);
+
     el.text($.format.date(el.attr('value'), datetime_formats[el.attr('format')]))
     el.attr('processed', 'true')
 }

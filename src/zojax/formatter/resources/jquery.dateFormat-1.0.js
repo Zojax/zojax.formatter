@@ -56,32 +56,16 @@
         };
         
         var parseTime = function (value) {
-            var retValue = value;
-            if (retValue.indexOf(".") !== -1) {
-                retValue = retValue.substring(0, retValue.indexOf("."));
-            }
-            
-            var values3 = retValue.split(":");
-            
-            if (values3.length === 3) {
-                hour = values3[0];
-                minute = values3[1];
-                second = values3[2];
-                
-                return {
-                        time: retValue,
-                        hour: hour,
-                        minute: minute,
-                        second: second
-                    };
-            } else {
-                return {
-                    time: "",
-                    hour: "",
-                    minute: "",
-                    second: ""
+            return {
+                    hour: value.getHours(),
+                    minute: value.getMinutes(),
+                    second: value.getSeconds()
                 };
-            }
+            return {
+                hour: "",
+                minute: "",
+                second: ""
+            };
         };
         
         return {
@@ -104,7 +88,7 @@
                     month = value.getMonth() + 1;
                     dayOfMonth = value.getDate();
                     dayOfWeek = value.getDay();
-                    time = parseTime(value.toTimeString());
+                    time = parseTime(value);
                     short_year = year.slice(2);
                     var pattern = "";
                     var retValue = "";

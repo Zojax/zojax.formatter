@@ -11,14 +11,16 @@ function setFancydatetimeFormatter(el)
     days = Math.floor(delta/(24*60*60*1000.0));
 
     var res;
-
+    var time = date.getTime()+now.getTimezoneOffset() - 60*1000*(parseInt(el.attr('offset')));
+    date.setTime(time);
+    var time_string = $.format.date(date, time_formats[el.attr('format')]);
     if (!years && !months && !weeks && days == 1) {
-        res = 'Yesterday at ' + el.attr('time');
+        res = 'Yesterday at ' + time_string;
 
     } else if (!years && !months && !weeks && days == 0) {
-        res = 'Today at ' + el.attr('time');
+        res = 'Today at ' + time_string;
     } else {
-        res = el.attr('date') + ' ' + el.attr('time');
+        res = el.attr('date') + ' ' + time_string;
     }
 
     el.text(res);

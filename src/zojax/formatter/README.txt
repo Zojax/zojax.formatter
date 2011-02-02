@@ -91,11 +91,11 @@ By default we use UTC timezone for output:
    >>> print page.render(request, now=dt)
    <html>
      <body>
-        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="short">01/01/07 12:00 AM</span>
-        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium">Jan 01, 2007 12:00:00 AM</span>
-        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="long">January 01, 2007 12:00:00 AM +0000</span>
-        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="full">Monday, January 01, 2007 12:00:00 AM UTC</span>
-        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium">Jan 01, 2007 12:00:00 AM</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="short" offset="0">01/01/07 12:00 AM</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium" offset="0">Jan 01, 2007 12:00:00 AM</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="long" offset="0">January 01, 2007 12:00:00 AM +0000</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="full" offset="0">Monday, January 01, 2007 12:00:00 AM UTC</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium" offset="0">Jan 01, 2007 12:00:00 AM</span>
      </body>
    </html>
 
@@ -105,11 +105,11 @@ If datetime object doesn't contain timezone information, UTC is used
    >>> print page.render(request, now=datetime(2007, 1, 1, 0, 0))
    <html>
      <body>
-        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="short">01/01/07 12:00 AM</span>
-        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium">Jan 01, 2007 12:00:00 AM</span>
-        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="long">January 01, 2007 12:00:00 AM +0000</span>
-        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="full">Monday, January 01, 2007 12:00:00 AM UTC</span>
-        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium">Jan 01, 2007 12:00:00 AM</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="short" offset="0">01/01/07 12:00 AM</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium" offset="0">Jan 01, 2007 12:00:00 AM</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="long" offset="0">January 01, 2007 12:00:00 AM +0000</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="full" offset="0">Monday, January 01, 2007 12:00:00 AM UTC</span>
+        <span class="zojax-formatter-datetime" value="January 01, 2007 00:00:00 +0000" format="medium" offset="0">Jan 01, 2007 12:00:00 AM</span>
      </body>
    </html>
 
@@ -122,11 +122,11 @@ not datetime value
    >>> print page.render(request, now=dt)
    <html>
      <body>
-        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="short">12/31/06 04:00 PM</span>
-        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="medium">Dec 31, 2006 04:00:00 PM</span>
-        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="long">December 31, 2006 04:00:00 PM -0800</span>
-        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="full">Sunday, December 31, 2006 04:00:00 PM PST</span>
-        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="medium">Dec 31, 2006 04:00:00 PM</span>
+        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="short" offset="-480">12/31/06 04:00 PM</span>
+        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="medium" offset="-480">Dec 31, 2006 04:00:00 PM</span>
+        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="long" offset="-480">December 31, 2006 04:00:00 PM -0800</span>
+        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="full" offset="-480">Sunday, December 31, 2006 04:00:00 PM PST</span>
+        <span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="medium" offset="-480">Dec 31, 2006 04:00:00 PM</span>
      </body>
    </html>
 
@@ -221,7 +221,7 @@ Also you can get formatter from python code
    >>> from zojax.formatter.utils import getFormatter
    >>> formatter = getFormatter(request, 'dateTime', 'full')
    >>> formatter.format(dt)
-   u'<span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="full">Sunday, December 31, 2006 04:00:00 PM PST</span>'
+   u'<span class="zojax-formatter-datetime" value="December 31, 2006 16:00:00 -0800" format="full" offset="-480">Sunday, December 31, 2006 04:00:00 PM PST</span>'
 
 We will get FormatterNotDefined if formatter is unknown
 

@@ -17,7 +17,7 @@ Author: Nikolay Kim <fafhrd91@gmail.com>
 $Id$
 """
 from pytz import timezone
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from zope import interface, component
 from zope.component import getUtility
@@ -43,14 +43,21 @@ class DatetimeFormatter(DateFormatter):
                              value.minute, value.second, value.microsecond, tz)
 
         value = value.astimezone(tz)
+        
+        offset = value.tzinfo.utcoffset(value)
+        if offset < timedelta():
+            ind = -1
+        else:
+            ind = 1
+        offset = ind*(abs(offset).seconds/600)*10
 
         format = '%s %s'%(
             getattr(configlet, 'date_'+self.tp),
             getattr(configlet, 'time_'+self.tp))
         
         formatted = unicode(value.strftime(str(format)))
-        return u'<span class="zojax-formatter-datetime" value="%s" format="%s">%s</span>' \
-                % (value.strftime('%B %d, %Y %H:%M:%S %z'), self.tp, formatted)
+        return u'<span class="zojax-formatter-datetime" value="%s" format="%s" offset="%s">%s</span>' \
+                % (value.strftime('%B %d, %Y %H:%M:%S %z'), self.tp, offset, formatted)
 
 
 class DatetimeFormatterFactory(object):

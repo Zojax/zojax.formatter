@@ -65,8 +65,8 @@ class FancyDatetimeFormatter(object):
 
         formatted = value.strftime('%B %d, %Y %H:%M:%S %z')
 
-        return u'<span class="zojax-formatter-fancydatetime" date="%s" time="%s" offset="%s" value="%s">%s</span>' \
-            % (fdate, ftime, offset, value.strftime('%B %d, %Y %H:%M:%S %z'), formatted)
+        return u'<span class="zojax-formatter-fancydatetime" date="%s" time="%s" offset="%s" value="%s" format="%s">%s</span>' \
+            % (fdate, ftime, offset, value.strftime('%B %d, %Y %H:%M:%S %z'), self.tp, formatted)
 
 
 
