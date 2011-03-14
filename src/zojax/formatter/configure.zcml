@@ -35,6 +35,9 @@
 
   <adapter name="humanDatetime"
      factory=".humandatetime.HumanDatetimeFormatterFactory" />
+     
+  <adapter name="size"
+     factory=".size.SizeFormatterFactory" />
 
   <!-- vocabularies -->
   <utility
