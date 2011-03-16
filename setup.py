@@ -71,6 +71,7 @@ setup(name='zojax.formatter',
       extras_require = dict(test=['zope.app.testing',
                                   'zope.testing',
                                   'zojax.controlpanel [test]',
+                                  'zojax.pageelement [test]',
                                   ]),
       include_package_data = True,
       zip_safe = False
