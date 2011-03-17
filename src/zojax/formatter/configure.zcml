@@ -67,6 +67,15 @@
        file="preferences-formatter.png" />
   </configure>
   
+  <zojax:pageelement
+     title="Formatter headers"
+     name="formatter.headers"
+     manager="zojax.theme.default.interfaces.IPageHeaders"
+     weight="100"
+     layer="zojax.theme.default.interfaces.ICommonSkinLayer"
+     class=".headers.FormatterHeaders"
+     zcml:condition="installed zojax.theme.default" />
+
   <configure
      xmlns:zcml="http://namespaces.zope.org/zcml"
      xmlns:browser="http://namespaces.zope.org/browser"
