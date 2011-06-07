@@ -38,7 +38,10 @@
      
   <adapter name="size"
      factory=".size.SizeFormatterFactory" />
-
+     
+  <adapter name="number"
+     factory=".number.NumberFormatterFactory" />
+ 
   <!-- vocabularies -->
   <utility
      name="Timezones"
