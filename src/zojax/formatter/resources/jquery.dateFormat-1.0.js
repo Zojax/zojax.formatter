@@ -191,6 +191,10 @@
                             retValue += currentPattern;
                             pattern = "";
                             break;
+                        case "-":
+                            retValue += currentPattern;
+                            pattern = "";
+                            break;
                         case "/":
                             retValue += currentPattern;
                             pattern = "";
