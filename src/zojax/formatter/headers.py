@@ -45,7 +45,9 @@ class FormatterHeaders(object):
         gregorian = locale.dates.calendars.get('gregorian')
         month_names = gregorian.getMonthNames()
         day_names = gregorian.getDayNames()
-        d_formats = map(lambda x: (x, locale.dates.getFormatter('date', x).getPattern()), ['short', 
+        day_names.insert(0, day_names[-1])
+        del day_names[-1]
+        d_formats = map(lambda x: (x, locale.dates.getFormatter('date', x).getPattern()), ['short',
                                                                                   'medium',
                                                                                   'long',
                                                                                   'full'])
