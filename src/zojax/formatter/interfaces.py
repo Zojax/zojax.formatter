@@ -80,6 +80,12 @@ class IFormatterConfiglet(interface.Interface):
         vocabulary = vocabulary.timezones,
         required = False)
 
+    timeFormat = schema.Choice(
+        title = _(u'Time format (12 hours / 24 hours)'),
+        values = ['12', '24'],
+        default = '12',
+        required = False)
+
     #principalTimezone = schema.Bool(
     #    title = _(u'Use principal timezone'),
     #    description = _(u'Render datetime with user selected timezone.'),
