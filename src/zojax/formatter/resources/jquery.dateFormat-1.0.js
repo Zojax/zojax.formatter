@@ -2,7 +2,7 @@
     $.format = (function () {
 
         var parseMonth = function (value) {
-                       
+
             switch (value) {
             case "Jan":
                 return "01";
@@ -32,9 +32,9 @@
                 return value;
             }
         };
-        
+
         var parseDay = function (value) {
-            
+
             switch (value) {
             case "Mon":
                 return 0;
@@ -54,7 +54,7 @@
                 return value;
             }
         };
-        
+
         var parseTime = function (value) {
             return {
                     hour: value.getHours(),
@@ -67,7 +67,7 @@
                 second: ""
             };
         };
-        
+
         return {
             date: function (value, format) {
                 //value = new java.util.Date()
@@ -92,7 +92,7 @@
                     short_year = year.slice(2);
                     var pattern = "";
                     var retValue = "";
-                    //Issue 1 - variable scope issue in format.date 
+                    //Issue 1 - variable scope issue in format.date
 					//Thanks jakemonO
                     for (var i = 0; i < format.length; i++) {
                         var currentPattern = format.charAt(i);
@@ -180,7 +180,7 @@
                             pattern = "";
                             break;
                         case "ss":
-                            retValue += time.second;
+                            retValue += time.second > 9 ? time.second : "0" + time.second;
                             pattern = "";
                             break;
                         case "a":
