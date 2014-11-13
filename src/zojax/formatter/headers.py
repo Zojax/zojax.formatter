@@ -39,14 +39,21 @@ def replaceTimeFormat(data, format='12', showSeconds=True):
     """ replaces the time format
         change = [('old', 'new'), ]
     """
-    sec = ':ss' if showSeconds else ''
 
     if format == '24':
-        change = [('h:mm:ss a', 'H:mm' + sec), ('h:mm a', 'H:mm')]
+        change = [('h:mm:ss a', 'H:mm:ss'), ('h:mm a', 'H:mm')]
     else:
-        change = [('H:mm:ss', 'h:mm' + sec + ' a'), ('H:mm', 'h:mm a')]
+        change = [('H:mm:ss', 'h:mm:ss a'), ('H:mm', 'h:mm a')]
 
-    return map(lambda x: (x[0], x[1].replace(change[0][0], change[0][1]).replace(change[1][0], change[1][1])), data)
+    if not showSeconds:
+        change.append((':ss', ''))
+
+    def repl(val):
+        for i in change:
+            val = val.replace(i[0], i[1])
+        return val
+
+    return map(lambda x: (x[0], repl(x[1])), data)
 
 
 def returnFormats(dates, formatter):
