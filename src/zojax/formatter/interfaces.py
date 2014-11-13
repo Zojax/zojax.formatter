@@ -86,6 +86,11 @@ class IFormatterConfiglet(interface.Interface):
         default = '12',
         required = False)
 
+    showSeconds = schema.Bool(
+        title = _('Show seconds'),
+        default = True,
+        required = False)
+
     #principalTimezone = schema.Bool(
     #    title = _(u'Use principal timezone'),
     #    description = _(u'Render datetime with user selected timezone.'),

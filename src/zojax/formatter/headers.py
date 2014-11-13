@@ -35,13 +35,18 @@ var day_names = %s;
 </script>"""
 
 
-def replaceTimeFormat(data, format='12'):
-    """ replaces the time format """
+def replaceTimeFormat(data, format='12', showSeconds=True):
+    """ replaces the time format
+        change = [('old', 'new'), ]
+    """
+    sec = ':ss' if showSeconds else ''
 
     if format == '24':
-        return map(lambda x: (x[0], x[1].replace('h:mm:ss a', 'H:mm:ss').replace('h:mm a', 'H:mm')), data)
+        change = [('h:mm:ss a', 'H:mm' + sec), ('h:mm a', 'H:mm')]
     else:
-        return map(lambda x: (x[0], x[1].replace('H:mm:ss', 'h:mm:ss a').replace('H:mm', 'h:mm a')), data)
+        change = [('H:mm:ss', 'h:mm' + sec + ' a'), ('H:mm', 'h:mm a')]
+
+    return map(lambda x: (x[0], x[1].replace(change[0][0], change[0][1]).replace(change[1][0], change[1][1])), data)
 
 
 def returnFormats(dates, formatter):
@@ -61,6 +66,7 @@ class FormatterHeaders(object):
         locale = self.request.locale
         configlet = getUtility(IFormatterConfiglet)
         timeformat = getattr(configlet, 'timeFormat', None)
+        showSeconds = getattr(configlet, 'showSeconds', True)
 
         dt_formats = returnFormats(locale.dates, 'dateTime')
 
@@ -77,8 +83,8 @@ class FormatterHeaders(object):
         t_formats = returnFormats(locale.dates, 'time')
 
         if timeformat:
-            dt_formats = replaceTimeFormat(dt_formats, timeformat)
-            t_formats = replaceTimeFormat(t_formats, timeformat)
+            dt_formats = replaceTimeFormat(dt_formats, timeformat, showSeconds)
+            t_formats = replaceTimeFormat(t_formats, timeformat, showSeconds)
 
         includeInplaceSource(jssource % (dumps(dict(dt_formats)),
                                          dumps(dict(t_formats)),
