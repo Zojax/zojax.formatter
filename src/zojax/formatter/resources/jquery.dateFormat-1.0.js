@@ -157,12 +157,12 @@
                             break;
                         case "H":
                             if (format.charAt(i+1) != 'H') {
-                                retValue += time.hour;
+                                retValue += time.hour > 9 ? time.hour : "0" + time.hour;
                                 pattern = "";
                             }
                             break;
                         case "HH":
-                            retValue += time.hour;
+                            retValue += time.hour > 9 ? time.hour : "0" + time.hour;
                             pattern = "";
                             break;
                         case "hh":
@@ -176,8 +176,14 @@
                             }
                             break;
                         case "mm":
-                            retValue += time.minute;
+                            retValue += time.minute > 9 ? time.minute : "0" + time.minute;
                             pattern = "";
+                            break;
+                        case "m":
+                            if (format.charAt(i+1) != 'm') {
+                                retValue += time.minute;
+                                pattern = "";
+                            }
                             break;
                         case "ss":
                             retValue += time.second > 9 ? time.second : "0" + time.second;
